@@ -10,7 +10,9 @@ find_package(catkin REQUIRED COMPONENTS
 roslint_cpp()
 
 catkin_package(
+  CFG_EXTRAS roscpp14.cmake
   INCLUDE_DIRS include
+  CATKIN_DEPENDS roscpp
 )
 
 include_directories(include)
@@ -18,18 +20,19 @@ include_directories(
   ${catkin_INCLUDE_DIRS}
 )
 
+include(${PROJECT_SOURCE_DIR}/cmake/roscpp14.cmake)
+
 roslint_cpp(samples/listener.cpp samples/service_server.cpp include/roscpp14/ros.h)
-add_definitions(-std=c++14)
 add_executable(listener samples/listener.cpp)
 add_executable(service_server samples/service_server.cpp)
 
 target_link_libraries(listener
   ${catkin_LIBRARIES}
-)
+  )
 
 target_link_libraries(service_server
   ${catkin_LIBRARIES}
-)
+  )
 
 install(TARGETS listener service_server
   ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
