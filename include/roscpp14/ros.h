@@ -26,6 +26,7 @@ public:
   using TransportHints = ::ros::TransportHints;
   using Subscriber = ::ros::Subscriber;
   using ServiceServer = ::ros::ServiceServer;
+
   template<class M>
   Subscriber subscribe(const std::string& topic, uint32_t queue_size,
                        const std::function<void(const M&)>& callback,
@@ -36,6 +37,7 @@ public:
                                        static_cast<boost::function<void(const M&)>>(callback),
                                        tracked_object, transport_hints);
   }
+
   template<class S>
   ServiceServer advertiseService(const std::string& service,
                                  const std::function<bool(typename S::Request&, typename S::Response&)> callback,
