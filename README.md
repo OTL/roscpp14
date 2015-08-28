@@ -1,6 +1,8 @@
 # roscpp14: ROS meets C++14!!
 
-roscpp supports c++14 now!!
+You can use c++14 if you use roscpp14.
+
+## Use lambda for callback function
 
 ### Topic Subscriber
 
@@ -40,21 +42,47 @@ int main(int argc, char **argv)
 }
 ```
 
+## Use user-defined literal for ros::Rate
+
+When you create a timer for 10.0[Hz], you'll write as below in roscpp.
+
+```c++
+ros::Rate r(10.0);
+r.sleep();
+```
+
+You can use 10.0_Hz like below with roscpp14 now!
+
+```c++
+using roscpp14::operator"" _Hz;
+
+auto r = 10.0_Hz;
+r.sleep();
+```
+
 ## Install
+
+### Supported Platforms
+
+* ROS
+  * Jade
+* OS
+  * OSX (10.10.x)
+  * Ubuntu15.04
+  * Ubuntu14.04 (with g++-4.9)
+
+### How to install
 
 ```bash
 cd ~/catkin_ws/src
 git clone https://github.com/OTL/roscpp14.git
 ```
 
-Its not possible because ROS Jade uses too old compiler!
-
-### OSX
-roscpp14 works with clang.
-If you have already installed ROS on OSX, you have nothing to do.
+It's not possible to release officially because ROS Jade/Kinetic supports very old
+distribution (Ubuntu14.04)
 
 ### Ubuntu14.04
-roscpp14 uses c++14. This means it requires g++-4.9, which is not installed by default.
+roscpp14 uses c++14. This means it requires g++-4.9, which can not be installed by default.
 Please install g++-4.9 like below.
 
 ```bash
@@ -66,4 +94,3 @@ sudo apt-get install g++-4.9
 ## How to use
 
 Just add roscpp14 as dependency.
-
