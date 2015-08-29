@@ -62,7 +62,7 @@ r.sleep();
 
 ## C++11
 
-If you can't use c++11 (Ubuntu14.04 default), you can write like below. (Repeating the type of message in lambda)
+If you can't use c++14 (Ubuntu14.04 default), you can write like below. (I don't like repeating the type of message in lambda, so I chose c++14 for generic lambda)
 
 ```c++
   auto sub = node.subscribe<std_msgs::String>("chatter", 10,
