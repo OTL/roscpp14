@@ -56,7 +56,7 @@ target_link_libraries(service_server11
   ${catkin_LIBRARIES}
   )
 
-install(TARGETS listener service_server
+install(TARGETS listener11 service_server11
   ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
