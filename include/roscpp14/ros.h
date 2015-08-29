@@ -21,6 +21,10 @@ namespace roscpp14
 ::ros::Rate operator"" _Hz(long double hz) {
   return ::ros::Rate(hz);
 }
+::ros::Duration operator"" _s(long double sec) {
+  return ::ros::Duration(sec);
+}
+
 class NodeHandle : public ::ros::NodeHandle
 {
 public:

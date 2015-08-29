@@ -60,6 +60,16 @@ auto r = 10.0_Hz;
 r.sleep();
 ```
 
+## C++11
+
+If you can't use c++11 (Ubuntu14.04 default), you can write like below. (Repeating the type of message in lambda)
+
+```c++
+  auto sub = node.subscribe<std_msgs::String>("chatter", 10,
+                                              [] (const std_msgs::String &msg) {
+                                                ROS_INFO("%s", msg.data.c_str()); });
+```
+
 ## Install
 
 ### Supported Platforms
@@ -78,12 +88,9 @@ cd ~/catkin_ws/src
 git clone https://github.com/OTL/roscpp14.git
 ```
 
-It's not possible to release officially because ROS Jade/Kinetic supports very old
-distribution (Ubuntu14.04)
-
 ### Ubuntu14.04
 roscpp14 uses c++14. This means it requires g++-4.9, which can not be installed by default.
-Please install g++-4.9 like below.
+Please install g++-4.9 using ppa, like below.
 
 ```bash
 sudo add-apt-repository ppa:ubuntu-toolchain-r/test

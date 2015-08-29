@@ -8,7 +8,7 @@ int main(int argc, char **argv)
   ros::init(argc, argv, "service_server");
   roscpp14::NodeHandle node;
   auto ser = node.advertiseService<std_srvs::Empty>("call_me",
-                                                    [&] (auto &req, auto &res) {
+                                                    [&] (std_srvs::Empty::Request &req, std_srvs::Empty::Response &res) {
                                                       ROS_INFO("called!");
                                                       return true;
                                                     });
