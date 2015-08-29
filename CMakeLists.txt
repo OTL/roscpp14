@@ -22,7 +22,7 @@ include_directories(
 
 include(${PROJECT_SOURCE_DIR}/cmake/roscpp14.cmake)
 
-roslint_cpp(samples/listener.cpp samples/service_server.cpp include/roscpp14/ros.h)
+roslint_cpp(samples/listener.cpp samples/service_server.cpp include/roscpp14/ros.h test/test_roscpp14.cpp)
 add_executable(listener samples/listener.cpp)
 add_executable(service_server samples/service_server.cpp)
 
@@ -46,8 +46,8 @@ install(DIRECTORY include/${PROJECT_NAME}/
   PATTERN ".svn" EXCLUDE
 )
 
-## Add gtest based cpp test target and link libraries
-# catkin_add_gtest(${PROJECT_NAME}-test test/test_roscpp11.cpp)
-# if(TARGET ${PROJECT_NAME}-test)
-#   target_link_libraries(${PROJECT_NAME}-test ${PROJECT_NAME})
-# endif()
+if (CATKIN_ENABLE_TESTING)
+  find_package(catkin REQUIRED COMPONENTS rostest roscpp)
+  add_rostest_gtest(test_roscpp14 test/roscpp14.test test/test_roscpp14.cpp)
+  target_link_libraries(test_roscpp14 ${catkin_LIBRARIES})
+endif()

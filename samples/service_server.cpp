@@ -3,7 +3,7 @@
 #include <roscpp14/ros.h>
 #include <std_srvs/Empty.h>
 
-int main(int argc, char **argv) 
+int main(int argc, char **argv)
 {
   ros::init(argc, argv, "service_server");
   roscpp14::NodeHandle node;
