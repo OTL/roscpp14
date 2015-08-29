@@ -1,9 +1,19 @@
 if (APPLE)
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14")
 else (APPLE)
-  # for Ubuntu14.04
-  # sudo add-apt-repository ppa:ubuntu-toolchain-r/test
-  # sudo apt-get update
-  # sudo apt-get install g++-4.9
-  set(CMAKE_CXX_COMPILER g++-4.9)
+  # for Ubuntu14.04, use c++11, if g++-4.9 is not installed.
+  if (CMAKE_COMPILER_IS_GNUCXX AND NOT ${CMAKE_CXX_COMPILER_VERSION} VERSION_LESS 4.9)
+    find_program(GXX49 g++-4.9)
+    if (NOT GXX49)
+      message("g++-4.9 is not found. if you want to enable c++14, please install g++-4.9")
+      set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+      add_definition("-DUSE_CXX11")
+      set(USE_CXX11 1)
+    else ()
+      set(CMAKE_CXX_COMPILER g++-4.9)
+      set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14")
+    endif()
+  else()
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14")
+  endif()
 endif (APPLE)
-add_definitions(-std=c++14)

@@ -22,15 +22,37 @@ include_directories(
 
 include(${PROJECT_SOURCE_DIR}/cmake/roscpp14.cmake)
 
-roslint_cpp(samples/listener.cpp samples/service_server.cpp include/roscpp14/ros.h test/test_roscpp14.cpp)
-add_executable(listener samples/listener.cpp)
-add_executable(service_server samples/service_server.cpp)
+roslint_cpp(
+  samples/listener.cpp samples/service_server.cpp
+  samples/listener11.cpp samples/service_server11.cpp
+  include/roscpp14/ros.h test/test_roscpp14.cpp)
 
-target_link_libraries(listener
+if (NOT USE_CXX11)
+  add_executable(listener samples/listener.cpp)
+  add_executable(service_server samples/service_server.cpp)
+
+  target_link_libraries(listener
+    ${catkin_LIBRARIES}
+    )
+
+  target_link_libraries(service_server
+    ${catkin_LIBRARIES}
+    )
+  install(TARGETS listener service_server
+    ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+    LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+    RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+    )
+endif()
+
+add_executable(listener11 samples/listener11.cpp)
+add_executable(service_server11 samples/service_server11.cpp)
+
+target_link_libraries(listener11
   ${catkin_LIBRARIES}
   )
 
-target_link_libraries(service_server
+target_link_libraries(service_server11
   ${catkin_LIBRARIES}
   )
 
